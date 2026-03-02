@@ -8,7 +8,7 @@
                     <img 
                     :src="shopping_cart_items[0].image" 
                     :alt="shopping_cart_items[0].productName" 
-                    :class="product-image">
+                    class="product-image">
                     <div class="item-details-with-actions">
                         <div class="item-details">
                             <h2>{{shopping_cart_items[0].productName}}</h2>
@@ -49,7 +49,7 @@
                 <div class="cart-list-item">
                     <img 
                     :src="shopping_cart_items[2].image" 
-                    :lt="shopping_cart_items[2].productName" 
+                    :alt="shopping_cart_items[2].productName" 
                     class="product-image">
                     <div class="item-details-with-actions">
                         <div class="item-details">
@@ -80,9 +80,14 @@
                         </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
-                                <button class="quantity-change-button">−</button>
-                                <input type="text" class="quantity-input" :value="shopping_cart_items[3].quantity"aria-label="quantity">
-                                <button class="quantity-change-button">+</button>
+                                <button class="quantity-change-button" @click="decreaseOne(shopping_cart_items[3].id)">−</button>
+                                <input 
+                                type="text" 
+                                class="quantity-input" 
+                                :value="shopping_cart_items[3].quantity" 
+                                aria-label="quantity"
+                                @blur="changeQuantity(shopping_cart_items[3].id, $event)">
+                                <button class="quantity-change-button" @click="increaseOne(shopping_cart_items[3].id)">+</button>
                             </div>
                             <button class="remove-item">✕</button>
                         </div>
@@ -142,11 +147,11 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
 
 let username = 'Harry'
 
-let hide_details = ref(false)
-let shopping_cart_items = [
+let shopping_cart_items = ref([
     {
         id:1,
         productName: 'Dragon Liver',
@@ -187,9 +192,34 @@ let shopping_cart_items = [
         quantity: 1,
         image: 'src/assets/img/Nimbus2000.jpg'
     },
-]
+])
+
+let hide_details = ref(false)
+
+function decreaseOne(id){
+    shopping_cart_items.value.some((item) =>{
+        if(item.id == id && item.quantity != 0) {
+            item.quantity = item.quantity - 1
+        }
+    })
+}
+
+function increaseOne(id){
+    shopping_cart_items.value.some((item) =>{
+        if(item.id == id) {
+            item.quantity = item.quantity + 1
+        }
+    })
+} 
 
 
+function changeQuantity(id, event){
+    shopping_cart_items.value.some(item =>{
+        if(item.id == id) {
+            item.quantity = parseInt(event.target.value)
+        }
+    })
+}
 
 </script>
 
