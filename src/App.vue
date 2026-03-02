@@ -13,7 +13,12 @@
                         <div class="item-details">
                             <h2>{{shopping_cart_items[0].productName}}</h2>
                             <p class="price">${{shopping_cart_items[0].price}}</p>
-                            <p class="in-stock-status"> <i class="fa-solid fa-check"></i> In stock</p>
+                            <p class="in-stock-status" v-if="shopping_cart_items[0].isInStock"> 
+                                <i class="fa-solid fa-check"></i> In stock
+                            </p>
+                            <p class="on-backorder-status" v-else> 
+                                <i class="fa-solid fa-hourglass-half"></i> On backorder
+                            </p>
                         </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
@@ -39,8 +44,12 @@
                         <div class="item-details">
                             <h2>{{shopping_cart_items[1].productName}}</h2>
                             <p class="price">${{ shopping_cart_items[1].price }}</p>
-                            <p class="in-stock-status"> <i class="fa-solid fa-check"></i> In stock</p>
-                        </div>
+                            <p class="in-stock-status" v-if="shopping_cart_items[1].isInStock"> 
+                                <i class="fa-solid fa-check"></i> In stock
+                            </p>
+                            <p class="on-backorder-status" v-else> 
+                                <i class="fa-solid fa-hourglass-half"></i> On backorder
+                            </p>                        </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
                                 <button class="quantity-change-button"  @click="decreaseOne(shopping_cart_items[1].id)">−</button>
@@ -65,7 +74,12 @@
                         <div class="item-details">
                             <h2>{{shopping_cart_items[2].productName}}</h2>
                             <p class="price">${{ shopping_cart_items[2].price }}</p>
-                            <p class="on-backorder-status"> <i class="fa-solid fa-hourglass-half"></i> On backorder</p>
+                            <p class="in-stock-status" v-if="shopping_cart_items[2].isInStock"> 
+                                <i class="fa-solid fa-check"></i> In stock
+                            </p>
+                            <p class="on-backorder-status" v-else> 
+                                <i class="fa-solid fa-hourglass-half"></i> On backorder
+                            </p>
                         </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
@@ -91,7 +105,12 @@
                         <div class="item-details">
                             <h2>{{shopping_cart_items[3].productName}}</h2>
                             <p class="price">${{ shopping_cart_items[3].price }}</p>
-                            <p class="in-stock-status"> <i class="fa-solid fa-check"></i> In stock</p>
+                            <p class="in-stock-status" v-if="shopping_cart_items[3].isInStock"> 
+                                <i class="fa-solid fa-check"></i> In stock
+                            </p>
+                            <p class="on-backorder-status" v-else> 
+                                <i class="fa-solid fa-hourglass-half"></i> On backorder
+                            </p>
                         </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
@@ -117,7 +136,12 @@
                         <div class="item-details">
                             <h2>{{shopping_cart_items[4].productName}}</h2>
                             <p class="price">${{ shopping_cart_items[4].price }}</p>
-                            <p class="in-stock-status"> <i class="fa-solid fa-check"></i> In stock</p>
+                            <p class="in-stock-status" v-if="shopping_cart_items[4].isInStock"> 
+                                <i class="fa-solid fa-check"></i> In stock
+                            </p>
+                            <p class="on-backorder-status" v-else> 
+                                <i class="fa-solid fa-hourglass-half"></i> On backorder
+                            </p>
                         </div>
                         <div class="item-actions">
                             <div class="quantity-selector">
@@ -192,7 +216,7 @@ let shopping_cart_items = ref([
         id:3,
         productName: 'Unicorn Tail Hair',
         price: 1200,
-        isInStock: true,
+        isInStock: false,
         quantity: 1,
         image: 'src/assets/img/UnicornTailHair.png'
     },
@@ -200,7 +224,7 @@ let shopping_cart_items = ref([
         id:4,
         productName: 'Wand',
         price: 2000,
-        isInStock: true,
+        isInStock: false,
         quantity: 1,
         image: 'src/assets/img/Wand.jpg'
     },
