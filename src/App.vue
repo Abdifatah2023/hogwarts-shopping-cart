@@ -69,7 +69,7 @@
 </template>
 
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 
 let username = 'Harry'
 
@@ -160,6 +160,17 @@ let taxEstimate = computed(() =>
 
 let total = computed(() =>
     subtotal.value + shippingEstimate.value + taxEstimate.value
+)
+
+watch(
+    shopping_cart_items, 
+    () => {
+        localStorage.setItem(
+            'hogwartsShoppingCart', 
+            JSON.stringify(shopping_cart_items.value)
+        )
+    },
+    {deep: true}
 )
 </script>
 
